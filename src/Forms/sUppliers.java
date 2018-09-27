@@ -35,11 +35,39 @@ public class sUppliers extends javax.swing.JDialog {
         setModal(true);
         setLocationRelativeTo(null);
          SuppliersTable.setModel(model);
-        
+        GenerateSUPCODE();
+        txtSUPCODE.setEnabled(false);
         
     }
+       public void GenerateSUPCODE(){
+    try {
+           Statement pst=con.createStatement();
+            ResultSet rs= pst.executeQuery("{call GenerateSuppCode}");
+          
+          
+             while(rs.next()){
+                  String id = rs.getString("SuppCode");
+          txtSUPCODE.setText(id);
+                 
+            }
+         
+        rs.close();
+     pst.close();
+            
+         
+      
+        } catch (Exception e) {
+            Security sec=new Security();
+            sec.setMessage(e.getMessage());
+            sec.setModule("Initializing Suppliers");
+            sec.setRegSource(_Constants.getRegSource());
+            sec.setUserID(_Constants.getUserId());
+            sec.SaveErrors();
+        }
+}
 public void LoadSupliers(){
         try {
+            model.setRowCount(0);
            Statement pst=con.createStatement();
             ResultSet rs= pst.executeQuery("{call SelectAllSuppliers}");
             while(rs.next()){
@@ -80,7 +108,8 @@ public void getRowValue(){
         int column = 0;
         int row = SuppliersTable.getSelectedRow();
         String S = SuppliersTable.getModel().getValueAt(row, column).toString();
-       SuppCode=S;
+        SuppCode=S;
+        txtSUPCODE.setText(S);
         fillFiields(S);
     } catch (Exception e) {
         Security sec=new Security();
@@ -178,10 +207,12 @@ public void fillFiields(String SuppCode){
         jLabel5 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jCheckIsActive = new javax.swing.JCheckBox();
+        txtSUPCODE = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         SuppliersTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("DEFINE NEW SUPPLIER");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -224,7 +255,7 @@ public void fillFiields(String SuppCode){
                 .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 676, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,19 +322,20 @@ public void fillFiields(String SuppCode){
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFax, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 474, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(txtPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(99, 99, 99))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                            .addComponent(txtMobile)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckIsActive, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTelephone)
+                            .addComponent(jCheckIsActive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtSUPCODE))
                         .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
@@ -337,8 +369,10 @@ public void fillFiields(String SuppCode){
                     .addComponent(jCheckIsActive)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 67, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFax, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSUPCODE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         SuppliersTable.setFont(new java.awt.Font("Californian FB", 0, 14)); // NOI18N
@@ -372,9 +406,7 @@ public void fillFiields(String SuppCode){
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 24, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,8 +415,7 @@ public void fillFiields(String SuppCode){
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -397,10 +428,9 @@ public void fillFiields(String SuppCode){
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -412,6 +442,7 @@ public void fillFiields(String SuppCode){
 
     private void SuppliersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuppliersTableMouseClicked
         getRowValue();
+        
     }//GEN-LAST:event_SuppliersTableMouseClicked
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
@@ -425,7 +456,7 @@ public void fillFiields(String SuppCode){
          try {
             String FullNames,PostalAdress,PhysicalAdress,Mobile,Email,Telephone,Fax;           
             Boolean IsActive;
-
+            String SuppCode=txtSUPCODE.getText();
             FullNames=txtSuppName.getText();
             PostalAdress=txtPostal.getText();
             PhysicalAdress=txtPhysical.getText();
@@ -436,12 +467,13 @@ public void fillFiields(String SuppCode){
             
             
             IsActive=jCheckIsActive.isSelected();
-            model.addRow(new Object[]{0, FullNames,PostalAdress,PhysicalAdress,Mobile,Email,Telephone,Fax,IsActive});
+            //model.addRow(new Object[]{SuppCode, FullNames,PostalAdress,PhysicalAdress,Mobile,Email,Telephone,Fax,IsActive});
                 
-            Supplier _Supplier=new Supplier( FullNames,  PostalAdress,  PhysicalAdress,  Mobile,  _Constants.getRegSource(),  _Constants.getUserId(),  Email,  Telephone,  Fax,  IsActive);
+            Supplier _Supplier=new Supplier( SuppCode,FullNames,  PostalAdress,  PhysicalAdress,  Mobile,  _Constants.getRegSource(),  _Constants.getUserId(),  Email,  Telephone,  Fax,  IsActive);
             if(_Supplier.SaveSupplier()){
                 JOptionPane.showMessageDialog(null,"Supllier Saved Successfully");
                 LoadSupliers();
+                GenerateSUPCODE();
             }
             else{
             JOptionPane.showMessageDialog(null,"Supllier Could Not Be Saved ");
@@ -535,6 +567,7 @@ public void fillFiields(String SuppCode){
     private javax.swing.JTextField txtMobile;
     private javax.swing.JTextField txtPhysical;
     private javax.swing.JTextField txtPostal;
+    private javax.swing.JTextField txtSUPCODE;
     private javax.swing.JTextField txtSuppName;
     private javax.swing.JTextField txtTelephone;
     // End of variables declaration//GEN-END:variables

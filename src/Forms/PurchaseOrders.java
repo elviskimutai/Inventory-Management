@@ -91,11 +91,11 @@ public void fillSupliers(){
            Statement pst=con.createStatement();
             ResultSet rs= pst.executeQuery("{call SelectAllSuppliers}");
           
-           jComSupliers.addItem("SuppCode  -  Suppliernames");
+           jComSupliers.addItem("SuppCode  /  Suppliernames");
              while(rs.next()){
                   String id = rs.getString("SuppCode");
             String nme = rs.getString("Suppliernames");
-            String cmb = (id+ "  -  "+nme);
+            String cmb = (id+ "  /  "+nme);
                 
                  //Items.add(1, new ItemCombo(rs.getString("ItemName"),rs.getString("ItemName")));
                 jComSupliers.addItem(cmb);    
@@ -519,7 +519,7 @@ public void fillitems(){
                      String Item = parts[0];
                      
                      String   Suplier1=jComSupliers.getSelectedItem().toString();
-                    String[] SuplierList = Suplier1.split("-");
+                    String[] SuplierList = Suplier1.split("/");
                      String Suplier = SuplierList[0];
                     // JOptionPane.showMessageDialog(null,rs.getNString("UserName"));
                     String ItemName=txtName.getText();
@@ -560,7 +560,7 @@ public void fillitems(){
                 Double Qty = Double.parseDouble(String.valueOf(POtable.getValueAt(row, 4)));
                 Double TotalCost = Double.parseDouble(String.valueOf(POtable.getValueAt(row, 5)));
                 Date DeliverBy= (Date)POtable.getValueAt(row, 6);
-                
+                _Constants.setPOCODE(POCOD);
               PurchaseOrder _PurchaseOrder=new PurchaseOrder( POCOD,  Item,  Suplier,  Qty,  CostPrice,  TotalCost,  DeliverBy);
                if(_PurchaseOrder.SavePurchaseOrder()){
                   

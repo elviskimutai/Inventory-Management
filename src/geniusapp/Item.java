@@ -17,7 +17,7 @@ public String ItemCode,ItemName,ItemDescription,UOM,RegSource,UserID;
 public Double SellingPrice,CostPrice;
 public Float VATValue;
 public Boolean VATInclusive;
- static SqlConnection _SqlConnection =new SqlConnection();
+static SqlConnection _SqlConnection =new SqlConnection();
      Connection con=_SqlConnection.connect();
 Constants _Contants=new Constants();
     public Item() {
@@ -26,13 +26,14 @@ Constants _Contants=new Constants();
     public String getItemCode() {
         return ItemCode;
     }
- public Double CostPrice() {
-        return SellingPrice;
-    }
-   public void setItemCode(String ItemCode) {
+    public void setItemCode(String ItemCode) {
         this.ItemCode = ItemCode;
     }
 
+ public Double CostPrice() {
+        return SellingPrice;
+    }
+   
     public void setCostPrice(Double CostPrice) {
         this.CostPrice = CostPrice;
     }
@@ -130,7 +131,7 @@ Constants _Contants=new Constants();
                   
                     pstmt.execute();
                     pstmt.close();
-                    System.out.println( "Saved Succesffuly" );
+                    
           return true;
       } catch (Exception e) {
            Security sec=new Security();

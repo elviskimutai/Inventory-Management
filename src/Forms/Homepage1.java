@@ -57,11 +57,20 @@ public class Homepage1 extends javax.swing.JFrame  {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6Users = new javax.swing.JMenu();
+        jMenuUsers = new javax.swing.JMenuItem();
         jMSuppliers = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("KOSACHEI HARDWARE");
 
         SplitPanel.setBackground(new java.awt.Color(153, 255, 204));
         SplitPanel.setDividerLocation(200);
@@ -71,9 +80,6 @@ public class Homepage1 extends javax.swing.JFrame  {
 
         UsersMenu.setBackground(new java.awt.Color(89, 82, 82));
         UsersMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                UsersMenuMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 UsersMenuMouseEntered(evt);
             }
@@ -267,6 +273,7 @@ public class Homepage1 extends javax.swing.JFrame  {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Add_Tag_40px.png"))); // NOI18N
         jMenu4.setText("Procurement              ");
 
+        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Purchase_Order_20px.png"))); // NOI18N
         jMenuItem3.setText("Purchase Orders");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -276,10 +283,12 @@ public class Homepage1 extends javax.swing.JFrame  {
         });
         jMenu4.add(jMenuItem3);
 
+        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Todo_List_20px.png"))); // NOI18N
         jMenuItem4.setText("Purchase Orders Approvals");
         jMenu4.add(jMenuItem4);
 
+        jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Waiter_20px.png"))); // NOI18N
         jMenuItem5.setText("Inventory Receipts");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -289,37 +298,85 @@ public class Homepage1 extends javax.swing.JFrame  {
         });
         jMenu4.add(jMenuItem5);
 
+        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Invoice_20px.png"))); // NOI18N
         jMenuItem6.setText("Invoice Matching");
         jMenu4.add(jMenuItem6);
 
+        jMenuItem7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Coins_20px_1.png"))); // NOI18N
         jMenuItem7.setText("Payments");
         jMenu4.add(jMenuItem7);
 
         jMenuBar1.add(jMenu4);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Downloads_Folder_40px.png"))); // NOI18N
         jMenu2.setText("Invenoty Management               ");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Add_shopping_Cart_20px.png"))); // NOI18N
-        jMenuItem1.setText("New Item");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Open_Sign_40px.png"))); // NOI18N
+        jMenuItem10.setText("Opening Stock");
+        jMenu2.add(jMenuItem10);
+
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Drag_Reorder_30px.png"))); // NOI18N
+        jMenuItem2.setText("Inventory Adjustments");
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Sell_40px_1.png"))); // NOI18N
+        jMenuItem8.setText("Inventory Issuing");
+        jMenu2.add(jMenuItem8);
+
+        jMenuItem9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Exchange_40px.png"))); // NOI18N
+        jMenuItem9.setText("Inventory Transfers");
+        jMenu2.add(jMenuItem9);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Trolley_40px.png"))); // NOI18N
+        jMenu5.setText("Sales         ");
+        jMenuBar1.add(jMenu5);
+
+        jMenu6Users.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Settings_40px.png"))); // NOI18N
+        jMenu6Users.setText("Setups           ");
+
+        jMenuUsers.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_User_40px.png"))); // NOI18N
+        jMenuUsers.setText("Users");
+        jMenuUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuUsersActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu6Users.add(jMenuUsers);
 
-        jMSuppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_User_Account_20px.png"))); // NOI18N
+        jMSuppliers.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMSuppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Supplier_40px.png"))); // NOI18N
         jMSuppliers.setText("Suppliers");
         jMSuppliers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMSuppliersActionPerformed(evt);
             }
         });
-        jMenu2.add(jMSuppliers);
+        jMenu6Users.add(jMSuppliers);
 
-        jMenuBar1.add(jMenu2);
+        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Add_Shopping_Cart_40px.png"))); // NOI18N
+        jMenuItem1.setText("New Item");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu6Users.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu6Users);
+
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Edit_Property_40px.png"))); // NOI18N
+        jMenu7.setText("Reports and Inquiries");
+        jMenuBar1.add(jMenu7);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_ShutDown_40px.png"))); // NOI18N
         jMenu3.setText("Sign Out");
@@ -347,16 +404,16 @@ public class Homepage1 extends javax.swing.JFrame  {
                 .addGap(0, 0, 0))
         );
 
+        getAccessibleContext().setAccessibleName("KOSACHEI HARDWARE");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UsersMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsersMenuMouseClicked
-        // TODO add your handling code here:
-        SplitPanel.setRightComponent( new UsersPanel());
-    }//GEN-LAST:event_UsersMenuMouseClicked
-
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
+        Login _log=new Login();
+        _log.setVisible(true);
+        dispose();
         System.exit(0);
     }//GEN-LAST:event_jMenu3ActionPerformed
 
@@ -436,6 +493,12 @@ public class Homepage1 extends javax.swing.JFrame  {
         _InventoryReceipts.show();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsersActionPerformed
+        // TODO add your handling code here:
+        Users _users=new Users();
+        _users.show();
+    }//GEN-LAST:event_jMenuUsersActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -492,13 +555,21 @@ public class Homepage1 extends javax.swing.JFrame  {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6Users;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuUsers;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

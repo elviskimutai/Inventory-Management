@@ -426,7 +426,7 @@ public void LoadEmployeeInformation(){
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Homepage1.SplitPanel.setRightComponent( new UsersPanel());
+       // Homepage1.SplitPanel.setRightComponent( new UsersPanel());
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

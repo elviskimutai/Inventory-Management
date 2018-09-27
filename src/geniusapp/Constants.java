@@ -10,9 +10,17 @@ package geniusapp;
  * @author Eng.Joseph Gitahi
  */
 public class Constants {
-    public static  String UserId,RegSource;
+    public static  String UserId,RegSource,POCODE;
 
     public Constants() {
+    }
+
+    public static String getPOCODE() {
+        return POCODE;
+    }
+
+    public static void setPOCODE(String POCODE) {
+        Constants.POCODE = POCODE;
     }
 
     public  String getUserId() {

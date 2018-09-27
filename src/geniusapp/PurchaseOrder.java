@@ -133,9 +133,9 @@ public boolean SavePurchaseOrder(){
         try {
                 
            PreparedStatement pst=con.prepareStatement("{call SelectPurchaseOrders(?,?,?)}");
-              pst.setString(1, "7");
-               pst.setString(2, "7");
-                pst.setString(3, "7");
+              pst.setString(1, _coConstants.getPOCODE());
+               pst.setString(2, _coConstants.getUserId());
+                pst.setString(3, _coConstants.getRegSource());
               ResultSet rs=pst.executeQuery();
          
              while(rs.next()){

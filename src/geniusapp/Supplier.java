@@ -19,7 +19,8 @@ public class Supplier {
 static SqlConnection _SqlConnection =new SqlConnection();
      Connection con=_SqlConnection.connect();
      Constants _Contants=new Constants();
-    public Supplier(String FullNames, String PostalAdress, String PhysicalAdress, String Mobile, String RegSource, String UserID, String Email, String Telephone, String Fax, Boolean IsActive) {
+    public Supplier(String SuppCode,String FullNames, String PostalAdress, String PhysicalAdress, String Mobile, String RegSource, String UserID, String Email, String Telephone, String Fax, Boolean IsActive) {
+       this.SuppCode=SuppCode;
         this.FullNames = FullNames;
         this.PostalAdress = PostalAdress;
         this.PhysicalAdress = PhysicalAdress;
@@ -44,6 +45,9 @@ static SqlConnection _SqlConnection =new SqlConnection();
     }
     public void setFullNames(String FullNames) {
         this.FullNames = FullNames;
+    }
+      public String getFullNames() {
+        return FullNames;
     }
     public String getPostalAdress() {
         return PostalAdress;
@@ -141,7 +145,7 @@ static SqlConnection _SqlConnection =new SqlConnection();
   }
       public boolean SaveSupplier(){
            try {
-           PreparedStatement pstmt = con.prepareStatement("{call SaveSuppliers(?,?,?,?,?,?,?,?,?,?)}");
+           PreparedStatement pstmt = con.prepareStatement("{call SaveSuppliers(?,?,?,?,?,?,?,?,?,?,?)}");
   
                     pstmt.setString(1, FullNames);
                     pstmt.setString(2, PostalAdress);
@@ -153,11 +157,12 @@ static SqlConnection _SqlConnection =new SqlConnection();
                     pstmt.setBoolean(8, IsActive);
                     pstmt.setString(9, RegSource);
                     pstmt.setString(10, UserID);
+                     pstmt.setString(11, SuppCode);
                   
                     pstmt.execute();
                     pstmt.close();
                    
-               con.close();
+              
           return true;
       } catch (Exception e) {
            Security sec=new Security();
