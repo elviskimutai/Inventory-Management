@@ -6,6 +6,7 @@
 package geniusapp;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 
 /**
@@ -16,6 +17,111 @@ public class Supplier {
    public String SuppCode, FullNames,PostalAdress,PhysicalAdress,Mobile,RegSource,UserID,Email,Telephone,Fax;
            
          public   Boolean IsActive;
+         
+        String DocNo ,DocType ,InvoiceNumber,BatchNo,RefNo,PayMode,BankAccount,PaymentStatus,Remarks;
+	 int LineNumber;
+	
+	Double InvoiceAmount ,Amount;
+	Date InvoiceDate ,PaymentDate ;
+
+    public String getDocNo() {
+        return DocNo;
+    }
+
+    public void setDocNo(String DocNo) {
+        this.DocNo = DocNo;
+    }
+
+    public String getDocType() {
+        return DocType;
+    }
+
+    public void setDocType(String DocType) {
+        this.DocType = DocType;
+    }
+
+    public String getInvoiceNumber() {
+        return InvoiceNumber;
+    }
+
+    public void setInvoiceNumber(String InvoiceNumber) {
+        this.InvoiceNumber = InvoiceNumber;
+    }
+
+    public String getBatchNo() {
+        return BatchNo;
+    }
+
+    public void setBatchNo(String BatchNo) {
+        this.BatchNo = BatchNo;
+    }
+
+    public String getRefNo() {
+        return RefNo;
+    }
+
+    public void setRefNo(String RefNo) {
+        this.RefNo = RefNo;
+    }
+
+    public String getPayMode() {
+        return PayMode;
+    }
+
+    public void setPayMode(String PayMode) {
+        this.PayMode = PayMode;
+    }
+
+    public String getBankAccount() {
+        return BankAccount;
+    }
+
+    public void setBankAccount(String BankAccount) {
+        this.BankAccount = BankAccount;
+    }
+
+    public String getPaymentStatus() {
+        return PaymentStatus;
+    }
+
+    public void setPaymentStatus(String PaymentStatus) {
+        this.PaymentStatus = PaymentStatus;
+    }
+
+    public String getRemarks() {
+        return Remarks;
+    }
+
+    public void setRemarks(String Remarks) {
+        this.Remarks = Remarks;
+    }
+
+    public Double getInvoiceAmount() {
+        return InvoiceAmount;
+    }
+
+    public void setInvoiceAmount(Double InvoiceAmount) {
+        this.InvoiceAmount = InvoiceAmount;
+    }
+
+    public Double getAmount() {
+        return Amount;
+    }
+
+    public void setAmount(Double Amount) {
+        this.Amount = Amount;
+    }
+
+    public Date getInvoiceDate() {
+        return InvoiceDate;
+    }
+
+    public void setInvoiceDate(Date InvoiceDate) {
+        this.InvoiceDate = InvoiceDate;
+    }
+	
+	
+        
 static SqlConnection _SqlConnection =new SqlConnection();
      Connection con=_SqlConnection.connect();
      Constants _Contants=new Constants();
@@ -143,7 +249,41 @@ static SqlConnection _SqlConnection =new SqlConnection();
           return false;
       }
   }
-      public boolean SaveSupplier(){
+     public boolean SaveSupplierPayment(){
+           try {
+           PreparedStatement pstmt = con.prepareStatement("{call SaveSupplierPayments(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+ 
+                    pstmt.setString(1, getDocNo());
+                    pstmt.setString(2, getDocType());
+                    pstmt.setString(3, getSuppCode());
+                    pstmt.setString(4, getInvoiceNumber());
+                    pstmt.setDouble(5, getInvoiceAmount());
+                    pstmt.setDate(6, getInvoiceDate());
+                    pstmt.setDouble(7, getAmount());
+                    pstmt.setString(8, getBatchNo());
+                    pstmt.setString(9, getRefNo());
+                    pstmt.setString(10, getPayMode());
+                     pstmt.setString(11, getBankAccount());
+                  pstmt.setString(12, getRemarks());
+                  pstmt.setString(13, getPaymentStatus());
+                  pstmt.setString(14, _Contants.getRegSource());
+                  pstmt.setString(15, _Contants.getUserId());
+                    pstmt.execute();
+                    pstmt.close();
+                   
+              
+          return true;
+      } catch (Exception e) {
+           Security sec=new Security();
+            sec.setMessage(e.getMessage());
+            sec.setModule("Saving Suppliers Payments");
+            sec.setRegSource(RegSource);
+            sec.setUserID(UserID);
+            sec.SaveErrors();
+                return false;
+            }
+      }   
+  public boolean SaveSupplier(){
            try {
            PreparedStatement pstmt = con.prepareStatement("{call SaveSuppliers(?,?,?,?,?,?,?,?,?,?,?)}");
   

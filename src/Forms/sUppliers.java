@@ -36,7 +36,7 @@ public class sUppliers extends javax.swing.JDialog {
         setLocationRelativeTo(null);
          SuppliersTable.setModel(model);
         GenerateSUPCODE();
-        txtSUPCODE.setEnabled(false);
+        txtSUPCODE.setEditable(false); 
         
     }
        public void GenerateSUPCODE(){
@@ -121,23 +121,23 @@ public void getRowValue(){
     }
 }
 public void DisableFields(){
-            txtSuppName.enable(false);
-            txtPostal.enable(false);
-            txtPhysical.enable(false);
-            txtMobile.enable(false);
-            txtEmail.enable(false);
-            txtTelephone.enable(false);
-            txtFax.enable(false);
-            jCheckIsActive.enable(false);
+            txtSuppName.setEditable(false); 
+            txtPostal.setEditable(false); 
+            txtPhysical.setEditable(false); 
+            txtMobile.setEditable(false); 
+            txtEmail.setEditable(false); 
+            txtTelephone.setEditable(false); 
+            txtFax.setEditable(false); 
+            jCheckIsActive.setEnabled(false); 
 }
 public void EnableFields(){
-            txtSuppName.enable(true);
-            txtPostal.enable(true);
-            txtPhysical.enable(true);
-            txtMobile.enable(true);
-            txtEmail.enable(true);
-            txtTelephone.enable(true);
-            txtFax.enable(true);
+            txtSuppName.setEditable(true); 
+            txtPostal.setEditable(true); 
+            txtPhysical.setEditable(true); 
+            txtMobile.setEditable(true); 
+            txtEmail.setEditable(true); 
+            txtTelephone.setEditable(true); 
+            txtFax.setEditable(true); 
             jCheckIsActive.enable(true);
 }
 public void fillFiields(String SuppCode){

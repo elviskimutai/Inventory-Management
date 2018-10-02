@@ -53,7 +53,7 @@ public class PurchaseOrders extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         fillitems();
         fillSupliers();
-        txtCumTotal.setEnabled(false);
+        txtCumTotal.setEditable(false); 
       
         POtable.setModel(model);
         POtable.getTableHeader().setReorderingAllowed(false);
@@ -526,7 +526,7 @@ public void fillitems(){
                
                Double CostPrice =Double.parseDouble(txtItemCostprice.getText());
                Double Quantity=Double.parseDouble(txtQuantity.getText());
-                Double TotalCost=Double.parseDouble(txtCost.getText());
+                Double TotalCost=CostPrice*Quantity;
                // DOB = new java.sql.Date(jDateChooser1.getDate().getTime());
                 Date DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
               model.addRow(new Object[]{Item, ItemName,Suplier,CostPrice,Quantity,TotalCost,DelDate});

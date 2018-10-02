@@ -52,9 +52,8 @@ public class Homepage1 extends javax.swing.JFrame  {
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
@@ -283,10 +282,15 @@ public class Homepage1 extends javax.swing.JFrame  {
         });
         jMenu4.add(jMenuItem3);
 
-        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Todo_List_20px.png"))); // NOI18N
-        jMenuItem4.setText("Purchase Orders Approvals");
-        jMenu4.add(jMenuItem4);
+        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Invoice_20px.png"))); // NOI18N
+        jMenuItem6.setText("Invoice Matching");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
 
         jMenuItem5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Waiter_20px.png"))); // NOI18N
@@ -298,14 +302,14 @@ public class Homepage1 extends javax.swing.JFrame  {
         });
         jMenu4.add(jMenuItem5);
 
-        jMenuItem6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Invoice_20px.png"))); // NOI18N
-        jMenuItem6.setText("Invoice Matching");
-        jMenu4.add(jMenuItem6);
-
         jMenuItem7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Coins_20px_1.png"))); // NOI18N
         jMenuItem7.setText("Payments");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem7);
 
         jMenuBar1.add(jMenu4);
@@ -404,8 +408,6 @@ public class Homepage1 extends javax.swing.JFrame  {
                 .addGap(0, 0, 0))
         );
 
-        getAccessibleContext().setAccessibleName("KOSACHEI HARDWARE");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -499,6 +501,16 @@ public class Homepage1 extends javax.swing.JFrame  {
         _users.show();
     }//GEN-LAST:event_jMenuUsersActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        InvoiceMatching _InvoiceMatching=new InvoiceMatching();
+        _InvoiceMatching.show();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        SupplierPayments _SupplierPayments =new SupplierPayments();
+        _SupplierPayments.show();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -563,7 +575,6 @@ public class Homepage1 extends javax.swing.JFrame  {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
