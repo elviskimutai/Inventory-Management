@@ -125,6 +125,90 @@ static SqlConnection _SqlConnection =new SqlConnection();
         this.UnitCost = UnitCost;
         this.ExtendedCost = ExtendedCost;
     }
+      public boolean SaveInventoryIsuing(){
+      try {
+           PreparedStatement pstmt = con.prepareStatement("{call saveInventorIsuing(?,?,?,?,?,?,?)}");
+
+                    pstmt.setString(1, getDocNo());
+                    pstmt.setString(2, getDocType());
+                    pstmt.setString(3, getItemCode());
+                    pstmt.setFloat(4, getQuantity());
+                    pstmt.setString(5, getRemarks());
+                
+                    pstmt.setString(6, _coConstants.getUserId());
+                    pstmt.setString(7, _coConstants.getRegSource());
+                  
+                    pstmt.execute();
+                    pstmt.close();
+                    con.close();
+                   
+          return true;
+      } catch (Exception e) {
+           Security sec=new Security();
+            sec.setMessage(e.getMessage());
+            sec.setModule("Saving Inventory Adjustments");
+            sec.setRegSource(_coConstants.getRegSource());
+            sec.setUserID(_coConstants.getUserId());
+            sec.SaveErrors();
+          return false;
+      }
+  }  
+    public boolean SaveInventoryAdjustments(){
+      try {
+           PreparedStatement pstmt = con.prepareStatement("{call saveInventorAdjustments(?,?,?,?,?,?,?)}");
+
+                    pstmt.setString(1, getDocNo());
+                    pstmt.setString(2, getDocType());
+                    pstmt.setString(3, getItemCode());
+                    pstmt.setFloat(4, getQuantity());
+                    pstmt.setString(5, getRemarks());
+                
+                    pstmt.setString(6, _coConstants.getUserId());
+                    pstmt.setString(7, _coConstants.getRegSource());
+                  
+                    pstmt.execute();
+                    pstmt.close();
+                    con.close();
+                   
+          return true;
+      } catch (Exception e) {
+           Security sec=new Security();
+            sec.setMessage(e.getMessage());
+            sec.setModule("Saving Inventory Adjustments");
+            sec.setRegSource(_coConstants.getRegSource());
+            sec.setUserID(_coConstants.getUserId());
+            sec.SaveErrors();
+          return false;
+      }
+  }  
+     public boolean SaveOpeningStock(){
+      try {
+           PreparedStatement pstmt = con.prepareStatement("{call saveInventorÓpening(?,?,?,?,?,?,?)}");
+
+                    pstmt.setString(1, getDocNo());
+                    pstmt.setString(2, getDocType());
+                    pstmt.setString(3, getItemCode());
+                    pstmt.setFloat(4, getQuantity());
+                    pstmt.setString(5, getRemarks());
+                
+                    pstmt.setString(6, _coConstants.getUserId());
+                    pstmt.setString(7, _coConstants.getRegSource());
+                  
+                    pstmt.execute();
+                    pstmt.close();
+                    con.close();
+                   
+          return true;
+      } catch (Exception e) {
+           Security sec=new Security();
+            sec.setMessage(e.getMessage());
+            sec.setModule("Saving Opening Stock");
+            sec.setRegSource(_coConstants.getRegSource());
+            sec.setUserID(_coConstants.getUserId());
+            sec.SaveErrors();
+          return false;
+      }
+  }  
        public boolean SaveInventortTransactions(){
       try {
            PreparedStatement pstmt = con.prepareStatement("{call saveInventorReceipts(?,?,?,?,?,?,?,?,?,?,?,?)}");

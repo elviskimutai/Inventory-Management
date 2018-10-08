@@ -65,6 +65,7 @@ public class Homepage1 extends javax.swing.JFrame  {
         jMenuUsers = new javax.swing.JMenuItem();
         jMSuppliers = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -304,7 +305,7 @@ public class Homepage1 extends javax.swing.JFrame  {
 
         jMenuItem7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Coins_20px_1.png"))); // NOI18N
-        jMenuItem7.setText("Payments");
+        jMenuItem7.setText("Supplier Payments");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -320,16 +321,31 @@ public class Homepage1 extends javax.swing.JFrame  {
         jMenuItem10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Open_Sign_40px.png"))); // NOI18N
         jMenuItem10.setText("Opening Stock");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
 
         jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Drag_Reorder_30px.png"))); // NOI18N
         jMenuItem2.setText("Inventory Adjustments");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuItem8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Sell_40px_1.png"))); // NOI18N
         jMenuItem8.setText("Inventory Issuing");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuItem9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -375,6 +391,16 @@ public class Homepage1 extends javax.swing.JFrame  {
             }
         });
         jMenu6Users.add(jMenuItem1);
+
+        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Money_Pound_40px.png"))); // NOI18N
+        jMenuItem4.setText("Supplier CreditNote");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu6Users.add(jMenuItem4);
 
         jMenuBar1.add(jMenu6Users);
 
@@ -511,6 +537,26 @@ public class Homepage1 extends javax.swing.JFrame  {
         _SupplierPayments.show();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+      CreditNotes _notes=new CreditNotes();
+      _notes.show();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        OpeningStock _OpeningStock=new OpeningStock();
+        _OpeningStock.show();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        InventoryAdjustment _InventoryAdjustment=new InventoryAdjustment();
+        _InventoryAdjustment.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        Inventoryisuing _Inventoryisuing=new Inventoryisuing();
+        _Inventoryisuing.show();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -575,6 +621,7 @@ public class Homepage1 extends javax.swing.JFrame  {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

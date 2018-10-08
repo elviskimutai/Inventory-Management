@@ -53,12 +53,14 @@ public class PurchaseOrders extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         fillitems();
         fillSupliers();
-        txtCumTotal.setEditable(false); 
-      
+        txtCumTotal.setEnabled(false); 
+     txtCost.setEnabled(false); 
         POtable.setModel(model);
         POtable.getTableHeader().setReorderingAllowed(false);
-        POCODE.setEditable(false);
+        POCODE.setEnabled(false);
         GeneratePO();
+         POtable.getTableHeader().setReorderingAllowed(false);
+         POtable.setEnabled(false);
     }
     public void GeneratePO(){
     try {
@@ -157,6 +159,7 @@ public void fillSupliers(){
         POCODE = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("PURCHASE ORDERS");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -219,8 +222,11 @@ public void fillSupliers(){
                 .addGap(708, 708, 708))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Purchase Orders Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(153, 153, 255))); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Purchase Orders Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(51, 51, 255))); // NOI18N
+
+        txtName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtName.setDisabledTextColor(new java.awt.Color(102, 102, 255));
 
         jLabel6.setText("Item Name");
 
@@ -233,6 +239,9 @@ public void fillSupliers(){
         });
 
         jLabel5.setText("Delivery Date");
+
+        txtItemCostprice.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtItemCostprice.setDisabledTextColor(new java.awt.Color(51, 255, 51));
 
         jComItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,6 +259,9 @@ public void fillSupliers(){
         });
 
         jLabel10.setText("Cumulative Cost");
+
+        txtCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtCost.setDisabledTextColor(new java.awt.Color(255, 51, 51));
 
         jComSupliers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,7 +336,8 @@ public void fillSupliers(){
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(153, 153, 255))); // NOI18N
+        jPanel4.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ITMES SELECTED", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(51, 51, 255))); // NOI18N
 
         POtable.setFont(new java.awt.Font("Californian FB", 0, 14)); // NOI18N
         POtable.setModel(new javax.swing.table.DefaultTableModel(
@@ -357,6 +370,9 @@ public void fillSupliers(){
         jLabel12.setText("Total Amount");
 
         jLabel1.setText("PO CODE");
+
+        POCODE.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        POCODE.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -491,7 +507,7 @@ public void fillitems(){
             }
          
         rs.close();
-     pst.close(); 
+        pst.close(); 
         } catch (Exception e) {
             Security sec=new Security();
             sec.setMessage(e.getMessage());
@@ -513,26 +529,68 @@ public void fillitems(){
     private void BTNAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddItemActionPerformed
         // TODO add your handling code here:
             try {
-          
-                    String   Item1=jComItems.getSelectedItem().toString();
-                    String[] parts = Item1.split("/");
-                     String Item = parts[0];
-                     
-                     String   Suplier1=jComSupliers.getSelectedItem().toString();
-                    String[] SuplierList = Suplier1.split("/");
-                     String Suplier = SuplierList[0];
+            int rows=POtable.getRowCount();
+           
+            if(rows==0){
+                 String   Item1=jComItems.getSelectedItem().toString();
+                String[] parts = Item1.split("/");
+                String Item = parts[0];
+                 String POCOD = POCODE.getText();             
+               String   Suplier1=jComSupliers.getSelectedItem().toString();
+               String[] SuplierList = Suplier1.split("/");
+               String Suplier = SuplierList[0];
                     // JOptionPane.showMessageDialog(null,rs.getNString("UserName"));
-                    String ItemName=txtName.getText();
+               String ItemName=txtName.getText();
                
                Double CostPrice =Double.parseDouble(txtItemCostprice.getText());
                Double Quantity=Double.parseDouble(txtQuantity.getText());
-                Double TotalCost=CostPrice*Quantity;
+               Double TotalCost=CostPrice*Quantity;
                // DOB = new java.sql.Date(jDateChooser1.getDate().getTime());
-                Date DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
+               Date DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
               model.addRow(new Object[]{Item, ItemName,Suplier,CostPrice,Quantity,TotalCost,DelDate});
-                  txtCumTotal.setText(Double.toString(Double.parseDouble(txtCumTotal.getText()) + TotalCost));
+              txtCumTotal.setText(Double.toString(Double.parseDouble(txtCumTotal.getText()) + TotalCost));
 
-      
+            }else{
+                boolean alreadyadded=false; 
+                  for(int row = 0; row<rows; row++){
+                       
+                    String tableItem = (String)POtable.getValueAt(row, 0);
+                    String   Item1=jComItems.getSelectedItem().toString();
+                    String[] parts = Item1.split("/");
+                    String Item = parts[0];
+                    if (tableItem.equals(Item)){
+                      alreadyadded=true;
+                      break;
+                      }else{
+                        alreadyadded=false;
+                       }
+                    }
+                if(alreadyadded){
+                    JOptionPane.showMessageDialog(null, "You have already added this item to the busket!");
+                }
+                else{
+                    String   Item1=jComItems.getSelectedItem().toString();
+                     String[] parts = Item1.split("/");
+                    String Item = parts[0];
+                    String POCOD = POCODE.getText();             
+                    String   Suplier1=jComSupliers.getSelectedItem().toString();
+                    String[] SuplierList = Suplier1.split("/");
+                    String Suplier = SuplierList[0];
+                         // JOptionPane.showMessageDialog(null,rs.getNString("UserName"));
+                    String ItemName=txtName.getText();
+
+                    Double CostPrice =Double.parseDouble(txtItemCostprice.getText());
+                    Double Quantity=Double.parseDouble(txtQuantity.getText());
+                    Double TotalCost=CostPrice*Quantity;
+                    // DOB = new java.sql.Date(jDateChooser1.getDate().getTime());
+                    Date DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
+                   model.addRow(new Object[]{Item, ItemName,Suplier,CostPrice,Quantity,TotalCost,DelDate});
+                   txtCumTotal.setText(Double.toString(Double.parseDouble(txtCumTotal.getText()) + TotalCost));       
+                 
+                }
+            }
+         
+                    
         } catch (Exception e) {
             e.printStackTrace();
             Security sec=new Security();

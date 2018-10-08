@@ -34,8 +34,10 @@ public class SupplierPayments extends javax.swing.JDialog {
           setModal(true);
         setLocationRelativeTo(null);
         inventoryReceipt.setModel(model);
+        inventoryReceipt.setEnabled(false);
         inventoryReceipt.getTableHeader().setReorderingAllowed(false);
-        jTextFieldDoCNo.setEditable(false); 
+        jTextFieldDoCNo.setEditable(false);
+        LoadSupliersPayments();
     }
 public void addPaymodes(){
     jComPayMode.addItem("Cash at Hand");
@@ -45,8 +47,43 @@ public void addPaymodes(){
     static SqlConnection _SqlConnection =new SqlConnection();
      Connection con=_SqlConnection.connect();
      Constants _Constants=new Constants();
-      DefaultTableModel model = new DefaultTableModel(new String[]{ "Item", "ItemName","Quantity","UnitCost","TotalCost"}, 0);
-   public void GeneratePAYCNO(){
+      DefaultTableModel model = new DefaultTableModel(new String[]{ "DocNo", "Supplier","InvoiceNo","PaymentDate","InvoiceAmount","AmountPaid","Balance","PayMode"}, 0);
+    public void LoadSupliersPayments(){
+        try {
+            model.setRowCount(0);
+           Statement pst=con.createStatement();
+            ResultSet rs= pst.executeQuery("{call SelectAllSupplierPayments}");
+            while(rs.next()){
+                String DocNo=rs.getNString("DocNo");
+                String Supplier=rs.getNString("Supplier");
+                String PayMode=rs.getNString("PayMode");
+                String InvoiceNo=rs.getNString("InvoiceNumber");
+                Date PaymentDate=rs.getDate("PaymentDate");
+                Double InvoiceAmount=rs.getDouble("InvoiceAmount");
+                Double AmountPaid=rs.getDouble("Amount");
+                 Double Balance=InvoiceAmount-AmountPaid;
+ 
+                
+                model.addRow(new Object[]{DocNo,Supplier, InvoiceNo,PaymentDate,InvoiceAmount,AmountPaid,Balance,PayMode});
+                              
+            }
+          
+            rs.close();
+            pst.close();
+            
+           // UsersTable.setModel(DbUtils.resultSetToTableModel(rs));
+      
+        } catch (Exception e) {
+              Security sec=new Security();
+            sec.setMessage(e.getMessage());
+            sec.setModule("Load fields Suppliers");
+            sec.setRegSource(_Constants.getRegSource());
+            sec.setUserID(_Constants.getUserId());
+            sec.SaveErrors();
+             
+        }
+    }
+      public void GeneratePAYCNO(){
     try {
         jTextFieldDoCNo.setText(null);
            Statement pst=con.createStatement();
@@ -135,13 +172,12 @@ public void fillSupliers(){
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButtonEdit = new javax.swing.JButton();
-        jButtonDelete = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPPLIER PAYMENTS");
 
+        inventoryReceipt.setBackground(new java.awt.Color(204, 204, 255));
         inventoryReceipt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         inventoryReceipt.setFont(new java.awt.Font("Californian FB", 0, 14)); // NOI18N
         inventoryReceipt.setModel(new javax.swing.table.DefaultTableModel(
@@ -164,8 +200,8 @@ public void fillSupliers(){
         });
         jScrollPane1.setViewportView(inventoryReceipt);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Receive items"));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "SUPPLIER PAYMENTS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(51, 51, 255))); // NOI18N
         jPanel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         jLabel11.setText("OPEN INVOICES");
@@ -283,7 +319,7 @@ public void fillSupliers(){
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(AMNTPaid))
                     .addComponent(jTextFieldbalance, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(182, 182, 182)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,17 +327,17 @@ public void fillSupliers(){
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCominvoices, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TransDate1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                    .addComponent(TransDate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldDoCNo)
                     .addComponent(jTextFieldRemarks)
-                    .addComponent(jTextFieldDOCType))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jTextFieldDOCType, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(293, 293, 293))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(12, 12, 12)
@@ -317,7 +353,11 @@ public void fillSupliers(){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldRemarks, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldRemarks, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addGap(21, 21, 21)
+                        .addComponent(jTextFieldDoCNo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -335,16 +375,9 @@ public void fillSupliers(){
                         .addGap(3, 3, 3)
                         .addComponent(jTextFieldAMNT, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(AMNTPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jTextFieldDoCNo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AMNTPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -355,22 +388,6 @@ public void fillSupliers(){
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Search_35px.png"))); // NOI18N
-
-        jButtonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Compose_35px.png"))); // NOI18N
-        jButtonEdit.setText("Edit");
-        jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditActionPerformed(evt);
-            }
-        });
-
-        jButtonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Trash_Can_35px.png"))); // NOI18N
-        jButtonDelete.setText("Delete");
-        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteActionPerformed(evt);
-            }
-        });
 
         jButtonSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Data_Recovery_35px.png"))); // NOI18N
         jButtonSave.setText("Save");
@@ -386,11 +403,7 @@ public void fillSupliers(){
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 690, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,8 +417,6 @@ public void fillSupliers(){
                     .addComponent(jLabel9)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonEdit)
-                        .addComponent(jButtonDelete)
                         .addComponent(jButtonSave)))
                 .addGap(708, 708, 708))
         );
@@ -532,45 +543,20 @@ public void fillSupliers(){
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDoCNoActionPerformed
 
-    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
-        // TODO add your handling code here:
-        //EnableFields();
-    }//GEN-LAST:event_jButtonEditActionPerformed
-
-    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        // TODO add your handling code here:
-        try {
-
-            //            Supplier _Supplier=new Supplier();
-            //            _Supplier.setSuppCode(SuppCode);
-            //            if(_Supplier.DeleteSupplier()){
-                //                JOptionPane.showMessageDialog(null,"Supplier Deleted Successfully");
-                //                LoadSupliers();
-                //  }
-        } catch (Exception e) {
-            Security sec=new Security();
-            sec.setMessage(e.getMessage());
-            sec.setModule("Deleting Items");
-            sec.setRegSource(_Constants.getRegSource());
-            sec.setUserID(_Constants.getUserId());
-            sec.SaveErrors();
-        }
-    }//GEN-LAST:event_jButtonDeleteActionPerformed
-
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         try {
   
-                 String   Supplier=jComSupliers1.getSelectedItem().toString();
-                 String[] parts = Supplier.split("/");
+                String   Supplier=jComSupliers1.getSelectedItem().toString();
+                String[] parts = Supplier.split("/");
                 String Supp = parts[0];
                 
-                  String   invoice=jCominvoices.getSelectedItem().toString();
+                String   invoice=jCominvoices.getSelectedItem().toString();
                 String[] parts2 = invoice.split("/");
                 String inv = parts2[0];
             
-             Double invamnt = Double.parseDouble(String.valueOf(parts2[1]));
-             Double amntpaid = Double.parseDouble(String.valueOf(parts2[2]));
-              String bal = parts2[3];
+                Double invamnt = Double.parseDouble(String.valueOf(parts2[1]));
+                Double amntpaid = Double.parseDouble(String.valueOf(parts2[2]));
+                 String bal = parts2[3];
                Date invdate = Date.valueOf(parts2[4]);
 
 
@@ -593,7 +579,7 @@ public void fillSupliers(){
                _Supplier.SaveSupplierPayment();
            
             JOptionPane.showMessageDialog(null,"Supplier Payment Saved Successfully");
-            model.setRowCount(0);
+            LoadSupliersPayments();
         } catch (Exception e) {
             e.printStackTrace();
             Security sec=new Security();
@@ -664,8 +650,6 @@ public void fillSupliers(){
     private javax.swing.JTextField AMNTPaid;
     private com.toedter.calendar.JDateChooser TransDate1;
     public javax.swing.JTable inventoryReceipt;
-    private javax.swing.JButton jButtonDelete;
-    private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox jComPayMode;
     private javax.swing.JComboBox jComSupliers1;

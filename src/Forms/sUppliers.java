@@ -275,8 +275,8 @@ public void fillFiields(String SuppCode){
                 .addGap(708, 708, 708))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Define New Item Here"));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "ADD NEW SUPPLIER HERE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(51, 51, 255))); // NOI18N
 
         jLabel10.setText("Fax");
 
@@ -375,6 +375,7 @@ public void fillFiields(String SuppCode){
                 .addGap(0, 15, Short.MAX_VALUE))
         );
 
+        SuppliersTable.setBackground(new java.awt.Color(204, 204, 255));
         SuppliersTable.setFont(new java.awt.Font("Californian FB", 0, 14)); // NOI18N
         SuppliersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
