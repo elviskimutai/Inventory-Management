@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Forms;
 
 import geniusapp.*;
@@ -14,10 +10,6 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Eng.Joseph Gitahi
- */
 public class sUppliers extends javax.swing.JDialog {
 
     /**
@@ -186,11 +178,11 @@ public void fillFiields(String SuppCode){
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtKeyword = new javax.swing.JTextField();
         jButtonEdit = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtFax = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -219,8 +211,6 @@ public void fillFiields(String SuppCode){
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Search_35px.png"))); // NOI18N
-
         jButtonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Compose_35px.png"))); // NOI18N
         jButtonEdit.setText("Edit");
         jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -245,6 +235,14 @@ public void fillFiields(String SuppCode){
             }
         });
 
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Search_35px.png"))); // NOI18N
+        btnSearch.setText("Seach");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -255,24 +253,26 @@ public void fillFiields(String SuppCode){
                 .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 676, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonEdit)
-                        .addComponent(jButtonDelete)
-                        .addComponent(jButtonSave)))
-                .addGap(708, 708, 708))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtKeyword)
+                    .addComponent(btnSearch))
+                .addGap(719, 719, 719))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonEdit)
+                    .addComponent(jButtonDelete)
+                    .addComponent(jButtonSave))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
@@ -322,7 +322,7 @@ public void fillFiields(String SuppCode){
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFax, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 498, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(txtPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -509,6 +509,48 @@ public void fillFiields(String SuppCode){
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        try {
+             String keyWord=txtKeyword.getText();
+             try (PreparedStatement pstmt = con.prepareStatement("{call SearchSuppliers(?)}")) {
+            pstmt.setString(1, keyWord);
+            
+            ResultSet rs=pstmt.executeQuery();
+            model.setRowCount(0);
+            while(rs.next()){
+                String SuppCode=rs.getNString("SuppCode");
+                String Suppliernames=rs.getNString("Suppliernames");
+                String PostalAdress=rs.getNString("PostalAdress");
+                String PhysicalAdress=rs.getNString("PhysicalAdress");
+                String Mobile=rs.getNString("Mobile");
+                
+                String Email=rs.getNString("Email");
+                
+                String Telephone=rs.getNString("Telephone");
+                
+                String Fax=rs.getNString("Fax");
+                 Boolean IsActive = rs.getBoolean("IsActive") ;
+                
+                model.addRow(new Object[]{SuppCode, Suppliernames,PostalAdress,PhysicalAdress,Mobile,Email,Telephone,Fax,IsActive});
+                  
+                
+            }
+            pstmt.close();
+           
+        }                   
+                    
+        } catch (Exception e) {
+            e.printStackTrace();
+            Security sec=new Security();
+            sec.setMessage(e.getMessage());
+            sec.setModule("Initializing Suppliers");
+            sec.setRegSource(_Constants.getRegSource());
+            sec.setUserID(_Constants.getUserId());
+            sec.SaveErrors();
+             
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -546,6 +588,7 @@ public void fillFiields(String SuppCode){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable SuppliersTable;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonSave;
@@ -557,14 +600,13 @@ public void fillFiields(String SuppCode){
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFax;
+    private javax.swing.JTextField txtKeyword;
     private javax.swing.JTextField txtMobile;
     private javax.swing.JTextField txtPhysical;
     private javax.swing.JTextField txtPostal;

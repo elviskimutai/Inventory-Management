@@ -11,6 +11,7 @@ import geniusapp.Security;
 import geniusapp.SqlConnection;
 import java.net.InetAddress;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -30,10 +31,11 @@ public class ItemMaster extends javax.swing.JDialog   {
      static SqlConnection _SqlConnection =new SqlConnection();
      Connection con=_SqlConnection.connect();
      Constants _Constants=new Constants();
+     DefaultTableModel model = new DefaultTableModel(new String[]{ "ItemCode", "ItemName","ItemDescription","CostPrice","SellingPrice","VATInclusive","VATValue","UOM"}, 0);
+           
     public ItemMaster() {
         initComponents();
-        
-        
+          TblItems.setModel(model);        
         setModal(true);
         setLocationRelativeTo(null);
         LoadItemss();
@@ -42,8 +44,7 @@ public void LoadItemss(){
         try {
            Statement pst=con.createStatement();
             ResultSet rs= pst.executeQuery("{call SelectAllItems}");
-            DefaultTableModel model = new DefaultTableModel(new String[]{ "ItemCode", "ItemName","ItemDescription","CostPrice","SellingPrice","VATInclusive","VATValue","UOM"}, 0);
-            while(rs.next()){
+             while(rs.next()){
                 String U=rs.getNString("ItemCode");
                 String N=rs.getNString("ItemName");
                 String E=rs.getNString("ItemDescription");
@@ -58,7 +59,7 @@ public void LoadItemss(){
                 model.addRow(new Object[]{U, N,E,Em,T,Nm,Ek,Emm});
                               
             }
-           TblItems.setModel(model);
+         
             pst.close();
            // UsersTable.setModel(DbUtils.resultSetToTableModel(rs));
       
@@ -83,12 +84,12 @@ public void LoadItemss(){
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtKeyword = new javax.swing.JTextField();
         BTNUpdate = new javax.swing.JButton();
         jButtonEdit = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
+        BTNSearch = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtVATValue = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -119,8 +120,6 @@ public void LoadItemss(){
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Search_35px.png"))); // NOI18N
 
         BTNUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Update_35px.png"))); // NOI18N
         BTNUpdate.setText("Update");
@@ -154,11 +153,20 @@ public void LoadItemss(){
             }
         });
 
+        BTNSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Forms/Images/icons8_Search_35px.png"))); // NOI18N
+        BTNSearch.setText("Serach");
+        BTNSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,24 +175,26 @@ public void LoadItemss(){
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BTNSearch)
+                .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BTNUpdate)
-                        .addComponent(jButtonEdit)
-                        .addComponent(jButton1)
-                        .addComponent(jButtonSave)))
-                .addGap(708, 708, 708))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTNSearch))
+                .addGap(719, 719, 719))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTNUpdate)
+                    .addComponent(jButtonEdit)
+                    .addComponent(jButton1)
+                    .addComponent(jButtonSave))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
@@ -384,28 +394,27 @@ public void getRowValue(){
     }
 }
 public void DisableFields(){
-       ItemCode1.enable(false);
-            txtItemName.enable(false);
-            Itemdesc.enable(false);
-            jComboBox2.enable(false);
+       ItemCode1.setEditable(false);
+            txtItemName.setEditable(false);
+            Itemdesc.setEditable(false);
+            jComboBox2.setEditable(false);
           
-            txtVATValue.enable(false);
+            txtVATValue.setEditable(false);
             jCheckBox1.enable(false);
-           txtSellingPrice.enable(false);
-            txtItemCostprice.enable(false);
-            
-            
+           txtSellingPrice.setEditable(false);
+            txtItemCostprice.setEditable(false);
+         
 }
 public void EnableFields(){
-        ItemCode1.enable(true);
-            txtItemName.enable(true);
-            Itemdesc.enable(true);
-            jComboBox2.enable(true);
+        ItemCode1.setEditable(true);
+            txtItemName.setEditable(true);
+            Itemdesc.setEditable(true);
+            jComboBox2.setEditable(true);
           
-            txtVATValue.enable(true);
+            txtVATValue.setEditable(true);
             jCheckBox1.enable(true);
-           txtSellingPrice.enable(true);
-            txtItemCostprice.enable(true);
+           txtSellingPrice.setEditable(true);
+            txtItemCostprice.setEditable(true);
             
             
 }
@@ -539,6 +548,45 @@ public void fillFiields(String ItemCode){
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void BTNSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNSearchActionPerformed
+         try {
+             String keyWord=txtKeyword.getText();
+             try (PreparedStatement pstmt = con.prepareStatement("{call SearchItem(?)}")) {
+            pstmt.setString(1, keyWord);
+            
+            ResultSet rs=pstmt.executeQuery();
+            model.setRowCount(0);
+            while(rs.next()){
+                String U=rs.getNString("ItemCode");
+                String N=rs.getNString("ItemName");
+                String E=rs.getNString("ItemDescription");
+                
+                String Em=rs.getString("CostPrice") ;//.getNString("CostPrice");
+                String T=rs.getString("CostPrice") ;//getNString("SellingPrice");
+                
+                Boolean Nm= rs.getBoolean("VATInclusive");// getNString("VATInclusive");
+                float Ek=rs.getFloat("VATValue");// getNString("VATValue");
+                String Emm=rs.getNString("UOM");
+              
+                model.addRow(new Object[]{U, N,E,Em,T,Nm,Ek,Emm});
+                
+            }
+            pstmt.close();
+           
+        }                   
+                    
+        } catch (Exception e) {
+            e.printStackTrace();
+            Security sec=new Security();
+            sec.setMessage(e.getMessage());
+            sec.setModule("Initializing Suppliers");
+            sec.setRegSource(_Constants.getRegSource());
+            sec.setUserID(_Constants.getUserId());
+            sec.SaveErrors();
+             
+        }
+    }//GEN-LAST:event_BTNSearchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -575,6 +623,7 @@ public void fillFiields(String ItemCode){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNSearch;
     private javax.swing.JButton BTNUpdate;
     private javax.swing.JTextField ItemCode;
     private javax.swing.JTextField ItemCode1;
@@ -593,14 +642,13 @@ public void fillFiields(String ItemCode){
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtItemCostprice;
     private javax.swing.JTextField txtItemName;
+    private javax.swing.JTextField txtKeyword;
     private javax.swing.JTextField txtSellingPrice;
     private javax.swing.JTextField txtVATValue;
     // End of variables declaration//GEN-END:variables
