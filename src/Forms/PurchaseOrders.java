@@ -228,8 +228,10 @@ public void fillSupliers(){
         txtName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtName.setDisabledTextColor(new java.awt.Color(102, 102, 255));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Item Name");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Quantity");
 
         txtQuantity.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +240,7 @@ public void fillSupliers(){
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Delivery Date");
 
         txtItemCostprice.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -249,6 +252,7 @@ public void fillSupliers(){
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Select Item");
 
         BTNAddItem.setText("ADD ITEM");
@@ -258,6 +262,7 @@ public void fillSupliers(){
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Cumulative Cost");
 
         txtCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -269,8 +274,10 @@ public void fillSupliers(){
             }
         });
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Select Suplier");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Unit Cost ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -530,20 +537,49 @@ public void fillitems(){
         // TODO add your handling code here:
             try {
             int rows=POtable.getRowCount();
-           
+           Double CostPrice ;
+           Double Quantity;
             if(rows==0){
                  String   Item1=jComItems.getSelectedItem().toString();
                 String[] parts = Item1.split("/");
                 String Item = parts[0];
-                 String POCOD = POCODE.getText();             
+                      if(Item.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter Item  To Continue");
+                return;
+            }
+                 String POCOD = POCODE.getText();  
+                  if(POCOD.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter POCOD  To Continue");
+                return;
+            }
                String   Suplier1=jComSupliers.getSelectedItem().toString();
                String[] SuplierList = Suplier1.split("/");
                String Suplier = SuplierList[0];
-                    // JOptionPane.showMessageDialog(null,rs.getNString("UserName"));
+                   
+               if(Suplier.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter Suplier  To Continue");
+                return;
+            }
                String ItemName=txtName.getText();
+                   if(ItemName.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter ItemName  To Continue");
+                return;
+            }
+                   String c=txtItemCostprice.getText();
+                          if(c.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter CostPrice  To Continue");
+                return;
+            }else{
+                         CostPrice =Double.parseDouble(c);      
+                          }
+               String q=txtQuantity.getText();
+               if(q.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter Quantity  To Continue");
+                return;
+            }else{
+                   Quantity=Double.parseDouble(q);      
+                  }
                
-               Double CostPrice =Double.parseDouble(txtItemCostprice.getText());
-               Double Quantity=Double.parseDouble(txtQuantity.getText());
                Double TotalCost=CostPrice*Quantity;
                // DOB = new java.sql.Date(jDateChooser1.getDate().getTime());
                Date DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
@@ -579,8 +615,20 @@ public void fillitems(){
                          // JOptionPane.showMessageDialog(null,rs.getNString("UserName"));
                     String ItemName=txtName.getText();
 
-                    Double CostPrice =Double.parseDouble(txtItemCostprice.getText());
-                    Double Quantity=Double.parseDouble(txtQuantity.getText());
+                       String c=txtItemCostprice.getText();
+                          if(c.isEmpty()){
+                                JOptionPane.showMessageDialog(null,"Enter CostPrice  To Continue");
+                                return;
+                            }else{
+                         CostPrice =Double.parseDouble(c);      
+                          }
+                    String q=txtQuantity.getText();
+                    if(q.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Enter Quantity  To Continue");
+                     return;
+                    }else{
+                      Quantity=Double.parseDouble(q);      
+                     }
                     Double TotalCost=CostPrice*Quantity;
                     // DOB = new java.sql.Date(jDateChooser1.getDate().getTime());
                     Date DelDate=new java.sql.Date(DeliverDate.getDate().getTime());

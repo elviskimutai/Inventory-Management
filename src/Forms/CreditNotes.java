@@ -204,12 +204,15 @@ public void fillSupliers(){
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "SUPPLIER CREDIT NOTES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(51, 51, 255))); // NOI18N
-        jPanel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jPanel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Invoice");
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Select Suplier");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Invoice Date");
 
         jComSupliers1.addActionListener(new java.awt.event.ActionListener() {
@@ -224,8 +227,10 @@ public void fillSupliers(){
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Remarks");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("DOC Type");
 
         jTextFieldDOCType.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -242,6 +247,7 @@ public void fillSupliers(){
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Quantity");
 
         jTextFieldQTY.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -251,6 +257,7 @@ public void fillSupliers(){
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Unit Cost");
 
         jTextFieldUnitCost.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -260,8 +267,10 @@ public void fillSupliers(){
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Select Item");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Extended Cost");
 
         jTextFieldDoCNo3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -356,7 +365,6 @@ public void fillSupliers(){
                 .addGap(23, 23, 23))
         );
 
-        inventoryReceipt.setBackground(new java.awt.Color(204, 204, 255));
         inventoryReceipt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         inventoryReceipt.setFont(new java.awt.Font("Californian FB", 0, 14)); // NOI18N
         inventoryReceipt.setModel(new javax.swing.table.DefaultTableModel(
@@ -544,20 +552,40 @@ public void fillSupliers(){
                 String   Invoice1=jInvoice.getSelectedItem().toString();
                 String[] parts = Invoice1.split("/");
                 String Invoice = parts[0];
-                
+                  if(Invoice.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Invoice  To Continue");
+                    return;
+                 }
                 String SuppCode1=jComSupliers1.getSelectedItem().toString();
                 String[] parts1 = SuppCode1.split("/");
                 String SuppCode = parts1[0];
-                
+                  if(SuppCode.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select SuppCode  To Continue");
+                    return;
+                 }
                 String Item1=jComItems.getSelectedItem().toString();
                 String[] parts2 = Item1.split("/");
                 String Item = parts2[0];
-                
+                if(Item.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Item  To Continue");
+                    return;
+                 }
                         
                 String DocNo=jTextFieldDoCNo.getText();
+                 if(DocNo.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select DocNo  To Continue");
+                    return;
+                 }
                 String DocType=jTextFieldDOCType.getText();
-               
+                if(DocType.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select DocType  To Continue");
+                    return;
+                 }
                 String Remarks=jTextFieldRemarks.getText();
+                if(Remarks.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Remarks  To Continue");
+                    return;
+                 }
 
                 Date TransDate=new Date(TransDate1.getDate().getTime());
                 

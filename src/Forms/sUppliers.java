@@ -458,14 +458,45 @@ public void fillFiields(String SuppCode){
             String FullNames,PostalAdress,PhysicalAdress,Mobile,Email,Telephone,Fax;           
             Boolean IsActive;
             String SuppCode=txtSUPCODE.getText();
+             if(SuppCode.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter SuppCode  To Continue");
+                return;
+            }
             FullNames=txtSuppName.getText();
+             if(FullNames.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter FullNames  To Continue");
+                return;
+            }
             PostalAdress=txtPostal.getText();
+            if(PostalAdress.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter PostalAdress  To Continue");
+                return;
+            }
             PhysicalAdress=txtPhysical.getText();
+            if(PhysicalAdress.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter PhysicalAdress  To Continue");
+                return;
+            }
             Mobile=txtMobile.getText();
+            if(Mobile.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter Mobile  To Continue");
+                return;
+            }
             Email=txtEmail.getText();
+            if(Email.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter Email  To Continue");
+                return;
+            }
             Telephone=txtTelephone.getText();
+             if(Telephone.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter Telephone  To Continue");
+                return;
+            }
             Fax=txtFax.getText();
-            
+             if(Fax.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter Fax  To Continue");
+                return;
+            }
             
             IsActive=jCheckIsActive.isSelected();
             //model.addRow(new Object[]{SuppCode, FullNames,PostalAdress,PhysicalAdress,Mobile,Email,Telephone,Fax,IsActive});

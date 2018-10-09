@@ -200,6 +200,8 @@ public void LoadItemss(){
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Define New Item Here", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(51, 51, 255))); // NOI18N
 
+        txtVATValue.setText("16");
+
         jLabel10.setText("VAT Value");
 
         jLabel6.setText("Selling Price");
@@ -302,7 +304,6 @@ public void LoadItemss(){
                         .addGap(0, 33, Short.MAX_VALUE))))
         );
 
-        TblItems.setBackground(new java.awt.Color(204, 204, 255));
         TblItems.setFont(new java.awt.Font("Californian FB", 0, 14)); // NOI18N
         TblItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -316,6 +317,7 @@ public void LoadItemss(){
             }
         ));
         TblItems.setGridColor(new java.awt.Color(255, 255, 255));
+        TblItems.setRowHeight(20);
         TblItems.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TblItemsMouseClicked(evt);
@@ -463,14 +465,51 @@ public void fillFiields(String ItemCode){
             Boolean VATInclusive;
 
             ItemCode=ItemCode1.getText();
+             if(ItemCode.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter ItemCode  To Continue");
+                return;
+            }
             ItemName=txtItemName.getText();
+             if(ItemName.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter ItemName  To Continue");
+                return;
+            }
             ItemDescription=Itemdesc.getText();
+             if(ItemDescription.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter ItemDescription  To Continue");
+                return;
+            }
             UOM=jComboBox2.getSelectedItem().toString();
-           
-            VATValue=Float.parseFloat(txtVATValue.getText());
+            if(UOM.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter UOM  To Continue");
+                return;
+            }
+            String va=txtVATValue.getText();
+                        
+              if(va.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter VATValue  To Continue");
+                return;
+            }else{
+                  VATValue=Float.parseFloat(va);
+              }
             VATInclusive=jCheckBox1.isSelected();
-            SellingPrice=Double.parseDouble(txtSellingPrice.getText());
-            CostPrice=Double.parseDouble(txtItemCostprice.getText());
+            String se=txtSellingPrice.getText();
+           
+            if(se.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter SellingPrice  To Continue");
+                return;
+            }else{
+                 SellingPrice=Double.parseDouble(se);
+            }
+            String co=txtItemCostprice.getText();
+            
+            if(co.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Enter CostPrice  To Continue");
+                return;
+            }else{
+                CostPrice=Double.parseDouble(co);
+            }
+                       
             Item _Item=new Item( ItemCode,  ItemName,  ItemDescription,  UOM,  _Constants.getRegSource(),  _Constants.getUserId(),  SellingPrice, CostPrice,  VATValue,  VATInclusive);
             if(_Item.SaveItem()){
                 JOptionPane.showMessageDialog(null,"Item Saved Successfully");

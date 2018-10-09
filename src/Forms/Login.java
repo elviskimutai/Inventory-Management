@@ -7,7 +7,7 @@
 package Forms;
 
 import geniusapp.Constants;
-import geniusapp.Security;
+
 import geniusapp.User;
 import java.net.InetAddress;
 import javax.swing.JOptionPane;
@@ -208,28 +208,33 @@ public class Login extends javax.swing.JFrame {
                String Username,Password;
                  Username=jTextField1.getText();
                 Password=jPasswordField1.getText();
-//        User _User= new User();
-//        if(_User.ValidateUser(Username,Password)){
+        User _User= new User();
+        if(_User.ValidateUser(Username,Password)){
+            Homepage1 _Homepage1 =new Homepage1();
+            _Homepage1.show();
+             InetAddress myHost = InetAddress.getLocalHost();
+            String RegSource=myHost.getHostName();               
+            Constants _Constants=new Constants();
+            _Constants.setUserId(Username);
+            _Constants.setRegSource(RegSource);
+            dispose();
+            //JOptionPane.showMessageDialog(null,"Validated");
+                 }  
+        else{
+            JOptionPane.showMessageDialog(null,"Incorect UserName");
+        }
+     
+//            InetAddress myHost = InetAddress.getLocalHost();
+//            String RegSource=myHost.getHostName();
+//            
+//     
+//            Constants _Constants=new Constants();
+//            _Constants.setUserId(Username);
+//            _Constants.setRegSource(RegSource);
 //            Homepage1 _Homepage1 =new Homepage1();
 //            _Homepage1.show();
 //            dispose();
 //            JOptionPane.showMessageDialog(null,"Validated");
-//                 }  
-//        else{
-//            JOptionPane.showMessageDialog(null,"Incorect UserName");
-//        }
-     
-            InetAddress myHost = InetAddress.getLocalHost();
-            String RegSource=myHost.getHostName();
-            
-     
-            Constants _Constants=new Constants();
-            _Constants.setUserId(Username);
-            _Constants.setRegSource(RegSource);
-            Homepage1 _Homepage1 =new Homepage1();
-            _Homepage1.show();
-            dispose();
-            JOptionPane.showMessageDialog(null,"Validated");
         } catch (Exception e) {
         
      JOptionPane.showMessageDialog(null,e.getMessage());

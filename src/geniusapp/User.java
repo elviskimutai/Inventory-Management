@@ -143,23 +143,22 @@ public class User {
     
     public boolean SaveUser(){
         try {
-             PreparedStatement pstmt = con.prepareStatement("{call SaveNewUser(?,?,?,?,?,?,?,?,?,?,?)}");
+             PreparedStatement pstmt = con.prepareStatement("{call SaveNewUser(?,?,?,?,?,?,?)}");
                     pstmt.setString(1, UserName);
                     pstmt.setString(2, FullNames);
-                    pstmt.setString(3, EmpNo);
-                    pstmt.setString(4, Password);
-                    pstmt.setString(5, Question);
-                    pstmt.setString(6, Answer);
-                    pstmt.setString(7, Email);
-                    pstmt.setString(8, Telephone);
-                    pstmt.setBoolean(9, IsActive);
-                    pstmt.setBoolean(10, SuperUser);
-                    pstmt.setDate(11, DOB);
+                   // pstmt.setString(3, EmpNo);
+                    pstmt.setString(3, Password);
+                    pstmt.setString(4, Question);
+                    pstmt.setString(5, Answer);
+                    pstmt.setString(6, Email);
+                    pstmt.setString(7, Telephone);
+                    //pstmt.setBoolean(9, IsActive);
+                   // pstmt.setBoolean(10, SuperUser);
+                   // pstmt.setDate(11, DOB);
                     pstmt.execute();
                     pstmt.close();
                     System.out.println( "Saved Succesffuly" );
 
-              
             return true;
         } catch (Exception e) {
             System.out.println( e.getMessage() );
@@ -169,18 +168,22 @@ public class User {
     public Boolean ValidateUser(String UserName1,String Password1 ){
         // String Result;
         try {
-            PreparedStatement pstmt = con.prepareStatement("{call spValidateUser(?,?)}");
+            PreparedStatement pstmt = con.prepareStatement("{call spValidateUser(?)}");
              
                     pstmt.setString(1, UserName1);
-                    pstmt.setString(2, Password1);
+                  
                     ResultSet rs = pstmt.executeQuery();
                     int rowcount = 0;
                     Boolean result=false;
                      while (rs.next()) {
                           rowcount =rs.getRow();
-                          if(rowcount>0){                             
-                            result= true;
-                          }
+                               String pas = rs.getString("Password");                                
+                               Decryption de =new Decryption();
+                               String decrypted= de.decrypt(pas);
+                                if (decrypted.equals(Password1)) {
+                                    result= true;
+                                }
+      
                         }
                      return result;
              

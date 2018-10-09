@@ -177,7 +177,6 @@ public void fillSupliers(){
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SUPPLIER PAYMENTS");
 
-        inventoryReceipt.setBackground(new java.awt.Color(204, 204, 255));
         inventoryReceipt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         inventoryReceipt.setFont(new java.awt.Font("Californian FB", 0, 14)); // NOI18N
         inventoryReceipt.setModel(new javax.swing.table.DefaultTableModel(
@@ -549,11 +548,17 @@ public void fillSupliers(){
                 String   Supplier=jComSupliers1.getSelectedItem().toString();
                 String[] parts = Supplier.split("/");
                 String Supp = parts[0];
-                
+                  if(Supp.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Supplier  To Continue");
+                    return;
+                 }
                 String   invoice=jCominvoices.getSelectedItem().toString();
                 String[] parts2 = invoice.split("/");
                 String inv = parts2[0];
-            
+                if(inv.isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Select Invoice  To Continue");
+                    return;
+                 }
                 Double invamnt = Double.parseDouble(String.valueOf(parts2[1]));
                 Double amntpaid = Double.parseDouble(String.valueOf(parts2[2]));
                  String bal = parts2[3];
@@ -574,7 +579,12 @@ public void fillSupliers(){
                     _Supplier.setRefNo(jTextFieldDoCNo.getText());
                     _Supplier.setPayMode(jComPayMode.getSelectedItem().toString());
                      _Supplier.setBankAccount("0");
-                  _Supplier.setRemarks(jTextFieldRemarks.getText());
+                     String rem=jTextFieldRemarks.getText();
+                      if(rem.isEmpty()){
+                    JOptionPane.showMessageDialog(null,"Enter Remarks  To Continue");
+                     return;
+                     }
+                  _Supplier.setRemarks(rem);
                   _Supplier.setPaymentStatus("Paid");
                _Supplier.SaveSupplierPayment();
            

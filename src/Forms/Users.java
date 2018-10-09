@@ -6,6 +6,8 @@
 package Forms;
 
 import geniusapp.Constants;
+import geniusapp.Decryption;
+import geniusapp.Encryption;
 import geniusapp.Security;
 import geniusapp.SqlConnection;
 import geniusapp.User;
@@ -495,8 +497,8 @@ public void fillFiields(String Id){
                 return;
             }
             if(ConfirmPassword.equals( Password)){
-                Password=txtPassword1.getText();
-
+            Encryption en=new Encryption();
+            Password=en.encrypt(txtPassword1.getText());
             }
             else{
                 JOptionPane.showMessageDialog(null," Password Does Not Match");

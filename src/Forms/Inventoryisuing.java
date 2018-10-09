@@ -269,7 +269,6 @@ public class Inventoryisuing extends javax.swing.JDialog {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        INTable.setBackground(new java.awt.Color(204, 204, 255));
         INTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         INTable.setFont(new java.awt.Font("Californian FB", 0, 14)); // NOI18N
         INTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -315,16 +314,38 @@ public class Inventoryisuing extends javax.swing.JDialog {
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         try {
         Boolean vaild=true;
+        float Quantity;
             String Item1=jComItems.getSelectedItem().toString();
             String[] parts2 = Item1.split("/");
             String Item = parts2[0];
-
+            if(Item.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Item  To Continue");
+                    return;
+                 }
             String DocNo=jTextFieldDoCNo.getText();
+             if(DocNo.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select DocNo  To Continue");
+                    return;
+                 }
             String DocType=jTextFieldDOCType.getText();
-
+             if(DocType.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select DocType  To Continue");
+                    return;
+                 }
             String Remarks=Reason.getText();
+            if(Remarks.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Remarks  To Continue");
+                    return;
+                 }
+            String q=txtQTY.getText();
+             if(q.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Remarks  To Continue");
+                    return;
+                 }else{
+                  Quantity=Float.parseFloat(String.valueOf(q));
+             }
 
-            float Quantity=Float.parseFloat(String.valueOf(txtQTY.getText()));
+            
 
             Inventory _Inventory=new Inventory( );
             _Inventory.setItemCode(Item);

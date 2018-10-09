@@ -327,13 +327,33 @@ public void LoadOpeningStock(){
             String Item1=jComItems.getSelectedItem().toString();
             String[] parts2 = Item1.split("/");
             String Item = parts2[0];
-
+            if(Item.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Item  To Continue");
+                    return;
+                 }
             String DocNo=jTextFieldDoCNo.getText();
+             if(DocNo.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select DocNo  To Continue");
+                    return;
+                 }
             String DocType=jTextFieldDOCType.getText();
+            if(DocType.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select DocType  To Continue");
+                    return;
+                 }
 
-            String Remarks=jTextFieldRemarks.getText();            
+            String Remarks=jTextFieldRemarks.getText();     
+            if(Remarks.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Remarks  To Continue");
+                    return;
+                 }
+                 String q=jTextFieldQTY.getText();
+            if(q.isEmpty()){
+                     JOptionPane.showMessageDialog(null,"Select Quantity  To Continue");
+                    return;
+                 }
 
-            float Quantity=Float.parseFloat(String.valueOf(jTextFieldQTY.getText()));
+            float Quantity=Float.parseFloat(String.valueOf(q));
             
 
             Inventory _Inventory=new Inventory( );
