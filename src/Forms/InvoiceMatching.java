@@ -548,6 +548,8 @@ public void fillSupliers(){
         try {
 
             int rows=inventoryReceipt.getRowCount();
+             Date DueDate=null;
+             Date InvoiceDate=null;
             for(int row = 0; row<rows; row++)
             {
                 String   PO1=jComPO.getSelectedItem().toString();
@@ -567,8 +569,20 @@ public void fillSupliers(){
                 String PONumber=PO;
                 String InvoiceNo=jTextFieldDoCNo.getText();
                 String PaymentTerms=jTextFieldPaymentsterms.getText();
-                Date InvoiceDate =new Date(dptduedate.getDate().getTime());
-                Date DueDate=new Date(TransDate1.getDate().getTime());
+                if (dptduedate.getDate()!=null) {
+                      InvoiceDate =new Date(dptduedate.getDate().getTime());
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Select invoice date!");
+                      return;
+                        }
+                if (TransDate1.getDate()!=null) {
+                      DueDate=new Date(TransDate1.getDate().getTime());
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Select due date!");
+                      return;
+                        }
+               
+                
                 float Qty=Float.parseFloat(String.valueOf(inventoryReceipt.getValueAt(row, 7)));
                 Double UnitCost=Double.parseDouble(String.valueOf(inventoryReceipt.getValueAt(row, 8)));
                 Double ExtendedCost=Double.parseDouble(String.valueOf(inventoryReceipt.getValueAt(row, 9)));

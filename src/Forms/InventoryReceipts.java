@@ -347,6 +347,7 @@ public void fillSupliers(){
         try {
             
            int rows=inventoryReceipt.getRowCount();
+           Date TransDate=null;
            for(int row = 0; row<rows; row++)
             {
                 String   PO1=jComPO.getSelectedItem().toString();
@@ -359,7 +360,13 @@ public void fillSupliers(){
                  String Remarks=jTextFieldRemarks.getText();
                
                  String ItemCode= (String)inventoryReceipt.getValueAt(row, 0);
-                 Date TransDate=new Date(TransDate1.getDate().getTime());
+                  if (TransDate1.getDate()!=null) {
+                     TransDate=new java.sql.Date(TransDate1.getDate().getTime());
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Select date!");
+                      return;
+                        }
+                 //Date TransDate=new Date(TransDate1.getDate().getTime());
                  float Quantity=Float.parseFloat(String.valueOf(inventoryReceipt.getValueAt(row, 2)));
                  Double UnitCost=Double.parseDouble(String.valueOf(inventoryReceipt.getValueAt(row, 3)));                  
                  Double ExtendedCost=Double.parseDouble(String.valueOf(inventoryReceipt.getValueAt(row, 4)));

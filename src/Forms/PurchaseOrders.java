@@ -539,6 +539,7 @@ public void fillitems(){
             int rows=POtable.getRowCount();
            Double CostPrice ;
            Double Quantity;
+           Date DelDate=null;
             if(rows==0){
                  String   Item1=jComItems.getSelectedItem().toString();
                 String[] parts = Item1.split("/");
@@ -582,7 +583,13 @@ public void fillitems(){
                
                Double TotalCost=CostPrice*Quantity;
                // DOB = new java.sql.Date(jDateChooser1.getDate().getTime());
-               Date DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
+               
+                if (DeliverDate.getDate()!=null) {
+                     DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
+                }else{
+                    JOptionPane.showMessageDialog(null, "Select date!");
+              return;
+                }
               model.addRow(new Object[]{Item, ItemName,Suplier,CostPrice,Quantity,TotalCost,DelDate});
               txtCumTotal.setText(Double.toString(Double.parseDouble(txtCumTotal.getText()) + TotalCost));
 
@@ -630,8 +637,12 @@ public void fillitems(){
                       Quantity=Double.parseDouble(q);      
                      }
                     Double TotalCost=CostPrice*Quantity;
-                    // DOB = new java.sql.Date(jDateChooser1.getDate().getTime());
-                    Date DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
+                     if (DeliverDate.getDate()!=null) {
+                     DelDate=new java.sql.Date(DeliverDate.getDate().getTime());
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Select date!");
+                      return;
+                        }
                    model.addRow(new Object[]{Item, ItemName,Suplier,CostPrice,Quantity,TotalCost,DelDate});
                    txtCumTotal.setText(Double.toString(Double.parseDouble(txtCumTotal.getText()) + TotalCost));       
                  
